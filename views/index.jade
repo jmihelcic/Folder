@@ -1,0 +1,23 @@
+extends layout
+
+// Source:
+// https://dribbble.com/shots/1519294-Fold-Folder-Foldest
+
+block content
+  #folder
+    .folder-object
+      .folder-back
+        .folder-back-fold
+      .folder-card
+      .folder-front
+        .folder-front-dark
+
+  #page.__page-open.
+    Note to self:<br><br>
+    <b>Don't</b> do complex animations like these, with CSS + JS by hand.
+    Its a complete callback and transitionend/animationend <b style="color: red">hell</b>.
+    <br><br>
+    Use a library or gifs or animated svgs.
+    <br><br>
+    Also poor performance on mobile... it really doesn't like to scale things. I need to
+    do more research. Later. I'm tired.

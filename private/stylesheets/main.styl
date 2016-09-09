@@ -1,0 +1,130 @@
+/**
+ * Created by mihelcic on 08. 09. 2016.
+ */
+
+*
+  padding 0
+  margin 0
+  box-sizing border-box
+
+html, body
+  width 100%
+  height 100%
+  background #212121
+  font-family Verdana, Geneva, sans-serif
+
+#page
+  pointer-events none
+  overflow hidden
+  z-index 10
+  position absolute
+  top 10px
+  right 10px
+  bottom 10px
+  left 10px
+  padding 16px
+  background #ffffff
+  border-radius 8px
+
+#folder
+  overflow hidden
+  z-index 0
+  width 100%
+  height 100%
+
+.folder-object
+  perspective 100px
+  z-index 0
+  position absolute
+  top 50%
+  left 50%
+  width 60px
+  height 40px
+  > div
+    position absolute
+    width 60px
+    height 40px
+    border-radius 2px
+  .folder-back
+    z-index 1
+    background #F44336
+    border-top-left-radius 0
+  .folder-back-fold
+    width 20px
+    height 5px
+    background #f44336
+    border-top-left-radius 2px
+    border-top-right-radius 2px
+  .folder-card
+    z-index 2
+    width 54px
+    height 38px
+    margin-left 2px
+    margin-top 1px
+    background #FFF
+  .folder-front
+    z-index 3
+    height 36px
+    background #f44336
+  .folder-front-dark
+    width 60px
+    height 36px
+    background #b71c1c
+
+// ## Animations
+
+// Page: Initial position
+#page
+  user-select none
+  transform translate3d(0, 0, 0) scale(1.0) // Only here as a placeholder
+  transition transform 0.3s linear, opacity 0.3s linear
+  opacity 1
+
+// Page open
+#page.__page-open
+  transform translate3d(0, 0, 0) scale(1.0) !important // Important is needed to override JS
+  opacity 1
+
+// Folder: Initial position
+#folder
+  .folder-object
+    transform translate3d(-30px, 20px, 0)
+    animation-fill-mode both
+  //transition transform 0.8s cubic-bezier(0.15, 0.45, 0.30, 1.85)
+  .folder-back
+    transform translate3d(0, 0, 0)
+  .folder-back-fold
+    transform translate3d(0, -4px, 0)
+  .folder-card
+    transform translate3d(0, 1px, 0)
+  .folder-front
+    transform-origin 50% 100%
+    transform translate3d(0, 4px, 0) rotateX(-260deg)
+    transition transform 0.4s ease-in-out
+  
+  .folder-front-dark
+    opacity 0.9
+    transition opacity 0.3s linear
+
+// Folder move
+@keyframes folder-move-close
+  0%
+    transform translate3d(-30px, 20px, 0)
+    animation-timing-function cubic-bezier(0.15, 0.45, 0.30, 1.85)
+  70%
+    transform translate3d(-30px, -40px, 0)
+    animation-timing-function ease-in-out
+  100%
+    transform translate3d(-30px, 20px, 0)
+
+#folder.__folder-move-up
+  .folder-object
+    animation folder-move-close 1s
+
+//transform translate3d(-30px,-40px,0)
+
+#folder.__folder-closed
+  .folder-front
+    transform translate3d(0, 4px, 0) rotateX(-0deg)
+  .folder-front-dark
+    opacity 0.1
